@@ -1,9 +1,11 @@
 package spring_boot_security.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import spring_boot_security.model.Role;
 import spring_boot_security.model.User;
+import spring_boot_security.service.RoleService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,10 +19,14 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private RoleService roleService;
+
+
     @Override
     public List<User> getAllUsers() {
-        TypedQuery<User> users = entityManager.createQuery("FROM User", User.class);
-//        TypedQuery<User> users = entityManager.createQuery("SELECT u from User u", User.class);
+//        TypedQuery<User> users = entityManager.createQuery("FROM User", User.class);
+        TypedQuery<User> users = entityManager.createQuery("SELECT u FROM User u", User.class);
         return users.getResultList();
     }
 
@@ -32,9 +38,28 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUser(int id) {
-        User user = entityManager.find(User.class, id);
-        return user;
+    public void updateUser(User user, int id, Set<Role> roles) {
+        User user1 = entityManager.find(User.class, id);
+
+        if (!user1.getPassword().equals(user.getPassword())) {
+            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+            System.out.println("Пароль изменен!");
+        }
+        user.setId(id);
+        user.setRoles(roles);
+        entityManager.merge(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User user1 = entityManager.find(User.class, user.getId());
+
+        if (!user1.getPassword().equals(user.getPassword())) {
+            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+            System.out.println("Пароль изменен!");
+        }
+        user.setRoles(roleService.getRoleById(user.getRolesId()));
+        entityManager.merge(user);
     }
 
     @Override
@@ -44,9 +69,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) {
-        TypedQuery<User> query = entityManager.createQuery("SELECT  u FROM User u WHERE u.username =:username", User.class);
-        query.setParameter("username", username);
+    public User findByUsername(String email) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT  u FROM User u WHERE u.email =:email", User.class);
+        query.setParameter("email", email);
         return query.getSingleResult();
+    }
+
+    @Override
+    public User getUserById(int id) {
+        User user = entityManager.find(User.class, id);
+        return user;
     }
 }

@@ -10,9 +10,9 @@ import spring_boot_security.model.User;
 @Controller
 public class UserController {
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @GetMapping("/user")
     public String getUser(@AuthenticationPrincipal User users, Model model) {
         model.addAttribute(users);
-        return "user";
+        return "index";
     }
 }

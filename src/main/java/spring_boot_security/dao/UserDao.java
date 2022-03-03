@@ -12,9 +12,13 @@ public interface UserDao {
 
     void saveUser(User user, Set<Role> roles);
 
-    User getUser(int id);
+    void updateUser(User user, int id, Set<Role> roles);
+
+    void updateUser(User user);
 
     void deleteUser(int id);
 
     User findByUsername(String username);
+
+    User getUserById(int Id);
 }

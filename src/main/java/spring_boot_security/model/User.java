@@ -4,7 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +27,7 @@ public class User implements UserDetails {
     @Column(name = "age")
     private int age;
 
+    @Email
     @Column(name = "email")
     private String email;
 
@@ -37,7 +40,10 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(int id, String username, String lastName, int age, String email, String password, Set<Role> roles) {
+    @Transient
+    private List<Integer> rolesId;
+
+    public User(int id, String username, String lastName, int age, String email, String password, Set<Role> roles, List<Integer> rolesId) {
         this.id = id;
         this.username = username;
         this.lastName = lastName;
@@ -45,7 +51,9 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.rolesId = rolesId;
     }
+
 
     public User() {
     }
@@ -96,6 +104,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isAdmin() {
+        return (roles.toString()).contains("ADMIN");
+    }
+
+    public List<Integer> getRolesId() {
+        return rolesId;
     }
 
     @Override

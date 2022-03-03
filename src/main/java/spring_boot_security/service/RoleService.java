@@ -2,7 +2,12 @@ package spring_boot_security.service;
 
 import spring_boot_security.model.Role;
 
+import java.util.List;
+import java.util.Set;
+
 public interface RoleService {
 
-    Role getRoleByName(String name);
+    List<Role> getAllRoles();
+
+    Set<Role> getRoleById(List<Integer> rolesId);
 }

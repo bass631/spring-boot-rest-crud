@@ -29,32 +29,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
+                .csrf().disable()
+                .formLogin()
+                .loginPage("/login")
+                .successHandler(successUserHandler)
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
 
+//////////////////  FOR POSTMAN APP  //////////////////
+
+//                    .httpBasic()
+//                .and()
+//                    .authorizeRequests()
+//                    .antMatchers("/").hasRole("ADMIN")
+//                .and()
+//                    .csrf().disable()
+//                    .formLogin().disable();
+
+////////////////////////////////////////////////////
     }
 
-    // аутентификация inMemory
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-////                User.withDefaultPasswordEncoder()
-////                        .username("user")
-////                        .password("user")
-////                        .roles("USER")
-////                        .build();
-//                User.withDefaultPasswordEncoder()
-//                        .username("admin")
-//                        .password("admin")
-//                        .roles("ADMIN")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
