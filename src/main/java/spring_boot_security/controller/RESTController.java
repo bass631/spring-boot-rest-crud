@@ -3,6 +3,7 @@ package spring_boot_security.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import spring_boot_security.model.Role;
@@ -27,6 +28,7 @@ public class RESTController {
     }
 
     @GetMapping("/users")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> allUsers = userService.getAllUsers();
         return allUsers != null && !allUsers.isEmpty()
@@ -35,6 +37,7 @@ public class RESTController {
     }
 
     @PostMapping("/users")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         Set<Role> roles = roleService.getRoleById(user.getRolesId());
         userService.saveUser(user, roles);
@@ -42,6 +45,7 @@ public class RESTController {
     }
 
     @PutMapping("/users")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return user != null
@@ -51,6 +55,7 @@ public class RESTController {
     }
 
     @DeleteMapping("/users/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<User> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);

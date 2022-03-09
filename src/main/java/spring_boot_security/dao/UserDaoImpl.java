@@ -1,7 +1,8 @@
 package spring_boot_security.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import spring_boot_security.model.Role;
 import spring_boot_security.model.User;
@@ -19,9 +20,15 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Lazy
     @Autowired
-    private RoleService roleService;
+    private PasswordEncoder passwordEncoder;
 
+    private final RoleService roleService;
+
+    public UserDaoImpl(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -32,7 +39,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user, Set<Role> roles) {
-        user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
         user.setRoles(roles);
         entityManager.merge(user);
     }
@@ -42,7 +50,8 @@ public class UserDaoImpl implements UserDao {
         User user1 = entityManager.find(User.class, id);
 
         if (!user1.getPassword().equals(user.getPassword())) {
-            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
             System.out.println("Пароль изменен!");
         }
         user.setId(id);
@@ -55,7 +64,8 @@ public class UserDaoImpl implements UserDao {
         User user1 = entityManager.find(User.class, user.getId());
 
         if (!user1.getPassword().equals(user.getPassword())) {
-            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()));
             System.out.println("Пароль изменен!");
         }
         user.setRoles(roleService.getRoleById(user.getRolesId()));
@@ -70,7 +80,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String email) {
-        TypedQuery<User> query = entityManager.createQuery("SELECT  u FROM User u WHERE u.email =:email", User.class);
+        TypedQuery<User> query = entityManager.createQuery("SELECT  u FROM User u JOIN FETCH u.roles WHERE u.email =:email", User.class);
         query.setParameter("email", email);
         return query.getSingleResult();
     }

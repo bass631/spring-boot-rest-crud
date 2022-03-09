@@ -125,14 +125,14 @@ async function addNewUser() {
         password: document.getElementById('newPassword').value,
         rolesId: $('#newRoles').val(),
     }
-    console.log("check_1")
+    // console.log("check_1")
     fetch("/api/users",
         {
             method: 'POST',
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json;charset=UTF-8'},
             body: JSON.stringify(user)
         }).then(r => r.status)
-    console.log("check_2")
+    // console.log("check_2")
 
     // setTimeout(getAllUsers, 1000);
     getAllUsers()

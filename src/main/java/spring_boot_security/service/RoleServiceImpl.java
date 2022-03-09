@@ -16,10 +16,12 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
 
+    @Transactional
     public List<Role> getAllRoles() {
         return roleDao.getAllRoles();
     }
 
+    @Transactional
     public Set<Role> getRoleById(List<Integer> rolesId) {
         return roleDao.getRoleById(rolesId);
     }

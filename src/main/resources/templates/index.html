@@ -164,7 +164,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary"
+                                                    <button class="btn btn-primary"
                                                             onclick="updateUser()">Edit
                                                     </button>
                                                 </div>
@@ -190,39 +190,45 @@
                                                     <div class="modal-body col-md text-center">
 
                                                         <label><b>ID</b></label>
-                                                        <input class="form-control" id="deleteId" name="delId"
+                                                        <!--                                                        <input class="form-control" id="deleteId" name="delId"-->
+                                                        <input class="form-control" id="deleteId"
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Name</b></label>
-                                                        <input class="form-control" id="deleteUsername" name="username"
+                                                        <!--                                                        <input class="form-control" id="deleteUsername" name="username"-->
+                                                        <input class="form-control" id="deleteUsername"
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Surname</b></label>
-                                                        <input class="form-control" id="deleteLastName" name="lastName"
+                                                        <!--                                                        <input class="form-control" id="deleteLastName" name="lastName"-->
+                                                        <input class="form-control" id="deleteLastName"
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Age</b></label>
-                                                        <input class="form-control" id="deleteAge" name="age"
+                                                        <!--                                                        <input class="form-control" id="deleteAge" name="age"-->
+                                                        <input class="form-control" id="deleteAge"
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Email</b></label>
-                                                        <input class="form-control" id="deleteEmail" name="email"
+                                                        <!--                                                        <input class="form-control" id="deleteEmail" name="email"-->
+                                                        <input class="form-control" id="deleteEmail"
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Password</b></label>
-                                                        <input class="form-control" id="deletePassword" name="password"
+                                                        <!--                                                        <input class="form-control" id="deletePassword" name="password"-->
+                                                        <input class="form-control" id="deletePassword"
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Roles</b></label>
-                                                        <input class="form-control" id="deleteRoles" name="roles"
+                                                        <!--                                                        <input class="form-control" id="deleteRoles" name="roles"-->
+                                                        <input class="form-control" id="deleteRoles"
                                                                readonly="readonly">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close
                                                         </button>
-                                                        <button type="submit" class="btn btn-danger"
-                                                                onclick="deleteUser()">
+                                                        <button class="btn btn-danger" onclick="deleteUser()">
                                                             Delete
                                                         </button>
                                                     </div>
@@ -254,8 +260,7 @@
                                         <input class="form-control" id="newLastName" name="lastName">
                                         <br>
                                         <label><b>Age</b></label>
-                                        <input class="form-control" id="newAge" type="number"
-                                               name="age">
+                                        <input class="form-control" id="newAge" type="number" name="age">
                                         <br>
                                         <label><b>Email</b></label>
                                         <input class="form-control" id="newEmail" name="email">
@@ -274,7 +279,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        <button type="submit" class="btn btn-success btn-lg"
+                                        <button class="btn btn-success btn-lg"
                                                 onclick="addNewUser()">Add new user
                                         </button>
                                     </form>
