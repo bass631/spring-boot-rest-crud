@@ -133,10 +133,12 @@
                                                                readonly="readonly">
                                                         <br>
                                                         <label><b>Name</b></label>
-                                                        <input class="form-control" id="updateUsername" name="username">
+                                                        <input class="form-control" id="updateUsername"
+                                                               name="username">
                                                         <br>
                                                         <label><b>Surname</b></label>
-                                                        <input class="form-control" id="updateLastName" name="lastName">
+                                                        <input class="form-control" id="updateLastName"
+                                                               name="lastName">
                                                         <br>
                                                         <label><b>Age</b></label>
                                                         <input class="form-control" id="updateAge" type="number"
@@ -147,7 +149,8 @@
                                                                name="email">
                                                         <br>
                                                         <label><b>Password</b></label>
-                                                        <input class="form-control" id="updatePassword" type="password"
+                                                        <input class="form-control" id="updatePassword"
+                                                               type="password"
                                                                name="password">
                                                         <br>
                                                         <div class="form-group" style="text-align: center">
@@ -224,23 +227,22 @@
                                                         <input class="form-control" id="deleteRoles"
                                                                readonly="readonly">
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Close
-                                                        </button>
-                                                        <button class="btn btn-danger" onclick="deleteUser()">
-                                                            Delete
-                                                        </button>
-                                                    </div>
                                                 </form>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                    <button class="btn btn-danger" onclick="deleteUser()">
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                                <!--                                                </form>-->
                                             </div>
                                         </div>
                                     </div>
-
-                                    </tr>
-
                                 </div>
                             </div>
+
 
                             <!--////////////////          SHEET <<NEW USER>>         ////////////////-->
 
@@ -251,7 +253,8 @@
                                 </div>
 
                                 <div class="col-md bg-white border">
-                                    <form align="center" class="offset-md-4 col-md-3 mt-3 mb-4" id="newUserForm">
+                                    <form align="center" class="offset-md-4 col-md-3 mt-3 mb-4"
+                                          id="newUserForm">
 
                                         <label><b>Name</b></label>
                                         <input class="form-control" id="newUsername" name="username">
@@ -264,11 +267,9 @@
                                         <br>
                                         <label><b>Email</b></label>
                                         <input class="form-control" id="newEmail" name="email">
-
                                         <br>
                                         <label><b>Password</b></label>
                                         <input class="form-control" id="newPassword" name="password">
-
                                         <br>
                                         <div class="form-group" style="text-align: center">
                                             <label><b>Roles</b></label>
@@ -278,11 +279,13 @@
                                                 <option value="2" selected="selected">USER</option>
                                             </select>
                                         </div>
-                                        <br>
+                                    </form>
+                                    <br>
+                                    <div align="center" class="offset-md-4 col-md-3 mt-3 mb-4">
                                         <button class="btn btn-success btn-lg"
                                                 onclick="addNewUser()">Add new user
                                         </button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

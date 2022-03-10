@@ -35,27 +35,26 @@ public class AdminController {
         return "index";
     }
 
-//    @PostMapping(value = "admin/save")
-//    public String saveUser(@ModelAttribute("user") User user,
-//                           @RequestParam("rolesId") List<Integer> rolesId) {
-//        Set<Role> roles = roleService.getRoleById(rolesId);
-//        userService.saveUser(user, roles);
-//        return "redirect:/admin/";
-//    }
-//
-//    @PostMapping(value = "admin/update")
-//    public String updateUser(@ModelAttribute("user") User user,
-//                             @RequestParam("updId") int id,
-//                             @RequestParam("rolesId") List<Integer> rolesId) {
-//        Set<Role> roles = roleService.getRoleById(rolesId);
-//        userService.updateUser(user, id, roles);
-//        return "redirect:/admin/";
-//    }
-//
-//    @DeleteMapping(value = "admin/delete")
-//    public String deleteUser(@RequestParam("delId") int id) {
-//        userService.deleteUser(id);
-//        return "redirect:/admin/";
-////        return null;
-//    }
+    @PostMapping(value = "admin/save")
+    public String saveUser(@ModelAttribute("user") User user,
+                           @RequestParam("rolesId") List<Integer> rolesId) {
+        Set<Role> roles = roleService.getRoleById(rolesId);
+        userService.saveUser(user, roles);
+        return "redirect:/admin/";
+    }
+
+    @PostMapping(value = "admin/update")
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam("updId") int id,
+                             @RequestParam("rolesId") List<Integer> rolesId) {
+        Set<Role> roles = roleService.getRoleById(rolesId);
+        userService.updateUser(user, id, roles);
+        return "redirect:/admin/";
+    }
+
+    @DeleteMapping(value = "admin/delete")
+    public String deleteUser(@RequestParam("delId") int id) {
+        userService.deleteUser(id);
+        return "redirect:/admin/";
+    }
 }
