@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: bass631
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: admin
+              - column:
+                  name: last_name
+                  value: admin
+              - column:
+                  name: age
+                  value: 90
+              - column:
+                  name: email
+                  value: admin@admin.ru
+              - column:
+                  name: password
+                  value: $2a$12$vMCOTODN5UwbGfjMSxE3suFjMpRqAgoLHu2qANSnoEUN2X8qBUkHm
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: first_name
+                  value: user
+              - column:
+                  name: last_name
+                  value: user
+              - column:
+                  name: age
+                  value: 101
+              - column:
+                  name: email
+                  value: user@user.ru
+              - column:
+                  name: password
+                  value: $2a$12$NsByYpKuYQnqosdsKwc6fehc.KonSLZJe3RZXe3zqrct/6nNnMfS2

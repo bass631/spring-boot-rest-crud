@@ -9,5 +9,5 @@ public interface RoleService {
 
     List<Role> getAllRoles();
 
-    Set<Role> getRoleById(List<Integer> rolesId);
+    Set<Role> getRoleById(List<Long> rolesId);
 }

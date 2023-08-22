@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user, int id, Set<Role> roles) {
+    public void updateUser(User user, long id, Set<Role> roles) {
         User user1 = entityManager.find(User.class, id);
 
         if (!user1.getPassword().equals(user.getPassword())) {
@@ -73,7 +73,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void deleteUser(long id) {
         User deleteUser = entityManager.find(User.class, id);
         entityManager.remove(deleteUser);
     }
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         User user = entityManager.find(User.class, id);
         return user;
     }

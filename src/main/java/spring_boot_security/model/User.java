@@ -1,5 +1,7 @@
 package spring_boot_security.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,60 +11,39 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
-
+    private long id;
     @Column(name = "first_name")
     private String username;
-
     @Column(name = "last_name")
     private String lastName;
-
     @Column(name = "age")
     private int age;
-
     @Email
     @Column(name = "email")
     private String email;
-
     @Column(name = "password")
     private String password;
-
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
     @Transient
-    private List<Integer> rolesId;
+    private List<Long> rolesId;
 
-    public User(int id, String username, String lastName, int age, String email, String password, Set<Role> roles, List<Integer> rolesId) {
-        this.id = id;
-        this.username = username;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.rolesId = rolesId;
-    }
-
-
-    public User() {
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -110,7 +91,7 @@ public class User implements UserDetails {
         return (roles.toString()).contains("ADMIN");
     }
 
-    public List<Integer> getRolesId() {
+    public List<Long> getRolesId() {
         return rolesId;
     }
 

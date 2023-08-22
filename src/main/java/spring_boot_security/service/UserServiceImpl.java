@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public void updateUser(User user, int id, Set<Role> roles) {
+    @Transactional(timeout = 10)
+    public void updateUser(User user, long id, Set<Role> roles) {
         userDao.updateUser(user, id, roles);
     }
 
@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public void deleteUser(int id) {
+    @Transactional(noRollbackFor = Exception.class)
+    public void deleteUser(long id) {
         userDao.deleteUser(id);
     }
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         return userDao.getUserById(id);
     }
 }

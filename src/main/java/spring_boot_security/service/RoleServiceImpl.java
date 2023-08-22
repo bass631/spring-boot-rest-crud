@@ -22,7 +22,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Transactional
-    public Set<Role> getRoleById(List<Integer> rolesId) {
+    public Set<Role> getRoleById(List<Long> rolesId) {
         return roleDao.getRoleById(rolesId);
     }
 }

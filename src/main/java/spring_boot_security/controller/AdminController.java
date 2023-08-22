@@ -37,7 +37,7 @@ public class AdminController {
 
     @PostMapping(value = "admin/save")
     public String saveUser(@ModelAttribute("user") User user,
-                           @RequestParam("rolesId") List<Integer> rolesId) {
+                           @RequestParam("rolesId") List<Long> rolesId) {
         Set<Role> roles = roleService.getRoleById(rolesId);
         userService.saveUser(user, roles);
         return "redirect:/admin/";
@@ -45,15 +45,15 @@ public class AdminController {
 
     @PostMapping(value = "admin/update")
     public String updateUser(@ModelAttribute("user") User user,
-                             @RequestParam("updId") int id,
-                             @RequestParam("rolesId") List<Integer> rolesId) {
+                             @RequestParam("updId") long id,
+                             @RequestParam("rolesId") List<Long> rolesId) {
         Set<Role> roles = roleService.getRoleById(rolesId);
         userService.updateUser(user, id, roles);
         return "redirect:/admin/";
     }
 
     @DeleteMapping(value = "admin/delete")
-    public String deleteUser(@RequestParam("delId") int id) {
+    public String deleteUser(@RequestParam("delId") long id) {
         userService.deleteUser(id);
         return "redirect:/admin/";
     }
